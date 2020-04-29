@@ -98,7 +98,7 @@ class _PinchZoomImageState extends State<PinchZoomImage> {
     overlayKey?.currentState
         ?.updatePosition(origin - (scaleStartPosition - details.focalPoint));
     if (details.scale >= 1.0)
-      overlayKey?.currentState?.updateScale(details.scale);
+      overlayKey?.currentState?.updateScale(details.scale * 0.75);
   }
 
   void _handleScaleEnd(ScaleEndDetails details) async {
