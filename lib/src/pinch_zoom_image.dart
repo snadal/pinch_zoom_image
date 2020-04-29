@@ -8,6 +8,7 @@ class PinchZoomImage extends StatefulWidget {
   final bool hideStatusBarWhileZooming;
   final Function onZoomStart;
   final Function onZoomEnd;
+  final double scaleFactor;
 
   PinchZoomImage({
     @required this.image,
@@ -15,6 +16,7 @@ class PinchZoomImage extends StatefulWidget {
     this.hideStatusBarWhileZooming = false,
     this.onZoomStart,
     this.onZoomEnd,
+    this.scaleFactor,
   });
 
   @override
@@ -98,7 +100,8 @@ class _PinchZoomImageState extends State<PinchZoomImage> {
     overlayKey?.currentState
         ?.updatePosition(origin - (scaleStartPosition - details.focalPoint));
     if (details.scale >= 1.0)
-      overlayKey?.currentState?.updateScale(details.scale * 0.75);
+      overlayKey?.currentState
+          ?.updateScale(details.scale * widget.scaleFactor ?? 1);
   }
 
   void _handleScaleEnd(ScaleEndDetails details) async {
